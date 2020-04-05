@@ -33,16 +33,19 @@ class DetailTable extends Component {
   }
 
   render(){
-    const { allowAdd, allowEdit, allowDelete, masterKey } = this.props;
+    const { masterKey } = this.props;
+    const localAdd = false;
+    const localEdit = false;
+    const localDelete = false;
     return(
       <DataTable key={"style_detail_" + this.state.masterKey}
         collapsedIcon={''}
         expandedIcon={''}
         showDetails={false}
         isChildTable={true}
-        allowAdd={allowAdd}
-        allowEdit={allowEdit}
-        allowDelete={allowDelete}
+        allowAdd={localAdd}
+        allowEdit={localEdit}
+        allowDelete={localDelete}
         headerNames={this.state.headerNames}
         data={this.state.data}
         masterKey={masterKey}

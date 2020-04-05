@@ -23,8 +23,7 @@ class TableRow extends React.Component {
   }
 
   render() {
-    const { toggleIcon, showDetails, isChildTable, allowAdd, allowEdit,
-      allowDelete, expanded, handleExpand, handleAdd, handleEdit, handleDelete, data} = this.props;
+    const { toggleIcon, showDetails, isChildTable, allowAdd, allowEdit, allowDelete, expanded, handleExpand, handleAdd, handleEdit, handleDelete, data} = this.props;
     
     let dataValues = Object.values( data );
     let dataOnly = showDetails? dataValues.slice(1): (isChildTable? dataValues.slice(2): dataValues.slice(1));
@@ -38,16 +37,16 @@ class TableRow extends React.Component {
               <tbody>
                 <tr>
                   {showDetails &&
-                    <td><Icon id={id} link name={toggleIcon} onClick={handleExpand}/></td>
+                    <td><Icon id={id} link className={toggleIcon} title={!expanded? "Click to expand details": "Click to hide details"} onClick={handleExpand}/></td>
                   }
                   {allowAdd &&
-                    <td><Icon id={id + '_add'} link name={this.state.addIcon} onClick={handleAdd}/></td>
+                    <td><Icon id={id + '_add'} link className={this.state.addIcon} onClick={handleAdd}/></td>
                   }
                   {allowEdit &&
-                    <td><Icon id={id + '_edit'} link name={this.state.editIcon} onClick={handleEdit}/></td>
+                    <td><Icon id={id + '_edit'} link className={this.state.editIcon} onClick={handleEdit}/></td>
                   }
                   {allowDelete &&
-                    <td><Icon id={id + '_delete'} link name={this.state.deleteIcon} onClick={handleDelete}/></td>
+                    <td><Icon id={id + '_delete'} link className={this.state.deleteIcon} onClick={handleDelete}/></td>
                   }
                   </tr>
                 </tbody>
@@ -61,15 +60,6 @@ class TableRow extends React.Component {
              <td ></td>
              <td colSpan={dataValues.length - 1}>
                <DetailTable
-                 collapsedIcon={''}
-                 expandedIcon={''}
-                 showDetails={false}
-                 isChildTable={true}
-                 allowAdd={allowAdd}
-                 allowEdit={allowEdit}
-                 allowDelete={allowEdit}
-                 headerNames={ [] }
-                 data={ [] }
                  masterKey={id}
                />
               </td>

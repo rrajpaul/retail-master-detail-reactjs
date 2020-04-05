@@ -7,7 +7,6 @@ class DataTable extends Component {
       this.state = {
         expanded: {},
         toggleIcon: '',
-        isChildTable: this.props.isChildTable,
         masterKey: this.props.masterKey
       };
   }
@@ -25,21 +24,20 @@ class DataTable extends Component {
     });
   }
 
-  renderTableData = (headerNames, collapsedIcon, expandedIcon, tableData, showDetails,  
+  renderTableData = (headerNames, collapsedIcon, expandedIcon, tableData, showDetails, isChildTable, 
     allowAdd, allowEdit, allowDelete) => {
-    return tableData.map((item, index) => {
-      let dataValues = Object.values( item );
+    return tableData.map((item) => {
       return (
         <TableRow
-          key={dataValues[0]}
+          key={Object.values( item )[0]}
           headerNames={headerNames}
-          toggleIcon={this.state.expanded[dataValues[0]]? expandedIcon: collapsedIcon}
+          toggleIcon={this.state.expanded[Object.values( item )[0]]? expandedIcon: collapsedIcon}
           showDetails={showDetails}
-          isChildTable={this.state.isChildTable}
+          isChildTable={isChildTable}
           allowAdd={allowAdd}
           allowEdit={allowEdit}
           allowDelete={allowDelete}
-          expanded={this.state.expanded[dataValues[0]]}
+          expanded={this.state.expanded[Object.values( item )[0]]}
           handleExpand={this.handleExpand}
           handleAdd={this.handleAdd}
           handleEdit={this.handleEdit}
@@ -59,25 +57,27 @@ class DataTable extends Component {
     this.setState({ expanded });
     expanded[e.target.id]? (toggleIcon = expandedIcon):  (toggleIcon = collapsedIcon);
     this.setState({ toggleIcon });
-    this.setState({ isChildTable: true });
+    //this.setState({ isChildTable: true });
     this.setState({ masterKey: parseInt(e.target.id) });
   }
 
   handleAdd = (e) => {
-    alert('handleAdd');
+    alert('handleAdd needs to be implemented');
   }
 
   handleEdit = (e) => {
-    alert('handleEdit');
+    alert('handleEdit needs to be implemented');
   }
 
   handleDelete = (e) => {
-    alert('handleDelete');
+    alert('handleDelete needs to be implemented');
   }
 
   render() {
-    let { collapsedIcon, expandedIcon, showDetails, isChildTable, allowAdd, allowEdit, allowDelete,
-            headerNames, data } = this.props;
+    const { collapsedIcon, expandedIcon, showDetails, isChildTable, headerNames, data } = this.props;
+    const localAdd = this.props.allowAdd;
+    const localEdit = this.props.allowEdit;
+    const localDelete = this.props.allowDelete;
     return (
       <div>
         <table className={isChildTable? "detail" : "master"}>
@@ -89,7 +89,7 @@ class DataTable extends Component {
             </tr>
             {
               this.renderTableData(headerNames, collapsedIcon, expandedIcon, data, showDetails, 
-              this.state.isChildTable, allowAdd, allowEdit, allowDelete)
+                isChildTable, localAdd, localEdit, localDelete)
             }
           </tbody>
         </table>
