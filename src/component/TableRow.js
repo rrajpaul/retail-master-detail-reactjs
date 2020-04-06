@@ -14,16 +14,21 @@ class TableRow extends React.Component {
       };
   }
 
-  renderRowData = (data) => {
+  renderRowData = (data, editCurrentRow, id) => {
     return data.map((item, index) => {
       return (
-          <td key={index + 'data'}>{item}</td>
+        <td key={index + 'data'} className={typeof item == 'number'? "cell-number": "cell-text"}>
+          {            
+            item
+          }
+        </td>
       )
     })
   }
 
   render() {
-    const { toggleIcon, showDetails, isChildTable, allowAdd, allowEdit, allowDelete, expanded, handleExpand, handleAdd, handleEdit, handleDelete, data} = this.props;
+    const { toggleIcon, showDetails, isChildTable, allowAdd, allowEdit, allowDelete, expanded, 
+      handleExpand, handleAdd, handleEdit, handleDelete, data, editCurrentRow} = this.props;
     
     let dataValues = Object.values( data );
     let dataOnly = showDetails? dataValues.slice(1): (isChildTable? dataValues.slice(2): dataValues.slice(1));
@@ -33,26 +38,26 @@ class TableRow extends React.Component {
       <>
         <tr key={id}>
           <td>
-            <table style={{width: "30px"}}>
+            <table  className={"toolbar"}>
               <tbody>
                 <tr>
                   {showDetails &&
                     <td><Icon id={id} link className={toggleIcon} title={!expanded? "Click to expand details": "Click to hide details"} onClick={handleExpand}/></td>
                   }
                   {allowAdd &&
-                    <td><Icon id={id + '_add'} link className={this.state.addIcon} onClick={handleAdd}/></td>
+                    <td><Icon id={id + '_add'} title={"Add a new row"} link className={this.state.addIcon} onClick={handleAdd}/></td>
                   }
                   {allowEdit &&
-                    <td><Icon id={id + '_edit'} link className={this.state.editIcon} onClick={handleEdit}/></td>
+                    <td><Icon id={id + '_edit'} title={"Edit current row"} link className={this.state.editIcon} onClick={handleEdit}/></td>
                   }
                   {allowDelete &&
-                    <td><Icon id={id + '_delete'} link className={this.state.deleteIcon} onClick={handleDelete}/></td>
+                    <td><Icon id={id + '_delete'} title={"Delete current row"} link className={this.state.deleteIcon} onClick={handleDelete}/></td>
                   }
                   </tr>
                 </tbody>
               </table>
           </td>
-          {this.renderRowData(dataOnly)}
+          {this.renderRowData(dataOnly, editCurrentRow, id)}
          </tr>
          {
            expanded &&

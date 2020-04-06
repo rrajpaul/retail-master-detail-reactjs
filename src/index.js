@@ -6,7 +6,7 @@ import MasterTable from './component/MasterTable';
 
   ReactDOM.render(
     <>
-      <h1 id='title'>Retail Style/Sku Example</h1>
+      <h1 className="grid-title">Retail Style/Sku Example</h1>
       <div className="grid-container">
         <MasterTable key={"style_sku_master_detail_0"}/>
       </div>

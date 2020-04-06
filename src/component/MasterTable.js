@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import DataTable from './DataTable';
 import axios from 'axios'
 
-let collapsedIcon = 'large caret right';
-let expandedIcon = 'large caret down';
+let collapsedIcon = 'my-color large caret right';
+let expandedIcon = 'my-color large caret down';
 
 class MasterTable extends Component {
   constructor(props) {
@@ -34,8 +34,8 @@ class MasterTable extends Component {
 
   render(){
     const localAdd = true;
-    const localEdit = false;
-    const localDelete = false;
+    const localEdit = true;
+    const localDelete = true;
     return(
       <DataTable key={"style_master_0"}
         collapsedIcon={collapsedIcon}
@@ -46,6 +46,10 @@ class MasterTable extends Component {
         allowEdit={localEdit}
         allowDelete={localDelete}
         headerNames={this.state.headerNames}
+        handleExpand={this.handleExpand}
+        handleAdd={this.handleAdd}
+        handleEdit={this.handleEdit}
+        handleDelete={this.handleDelete}
         data={this.state.data}
       />
     )

@@ -7,7 +7,8 @@ class DataTable extends Component {
       this.state = {
         expanded: {},
         toggleIcon: '',
-        masterKey: this.props.masterKey
+        masterKey: this.props.masterKey,
+        editCurrentRow: -1
       };
   }
 
@@ -27,23 +28,25 @@ class DataTable extends Component {
   renderTableData = (headerNames, collapsedIcon, expandedIcon, tableData, showDetails, isChildTable, 
     allowAdd, allowEdit, allowDelete) => {
     return tableData.map((item) => {
+      let id = Object.values( item )[0];
       return (
         <TableRow
-          key={Object.values( item )[0]}
+          key={id}
           headerNames={headerNames}
-          toggleIcon={this.state.expanded[Object.values( item )[0]]? expandedIcon: collapsedIcon}
+          toggleIcon={this.state.expanded[id]? expandedIcon: collapsedIcon}
           showDetails={showDetails}
           isChildTable={isChildTable}
           allowAdd={allowAdd}
           allowEdit={allowEdit}
           allowDelete={allowDelete}
-          expanded={this.state.expanded[Object.values( item )[0]]}
+          expanded={this.state.expanded[id]}
           handleExpand={this.handleExpand}
           handleAdd={this.handleAdd}
           handleEdit={this.handleEdit}
           handleDelete={this.handleDelete}
           data={item}
           masterKey={this.state.masterKey}
+          editCurrentRow={this.state.editCurrentRow}
          />
       )
     })
@@ -57,7 +60,6 @@ class DataTable extends Component {
     this.setState({ expanded });
     expanded[e.target.id]? (toggleIcon = expandedIcon):  (toggleIcon = collapsedIcon);
     this.setState({ toggleIcon });
-    //this.setState({ isChildTable: true });
     this.setState({ masterKey: parseInt(e.target.id) });
   }
 
@@ -66,7 +68,9 @@ class DataTable extends Component {
   }
 
   handleEdit = (e) => {
-    alert('handleEdit needs to be implemented');
+    //alert('handleEdit needs to be implemented');
+    let editCurrentRow = this.state.masterKey;
+    this.setState({ editCurrentRow });
   }
 
   handleDelete = (e) => {

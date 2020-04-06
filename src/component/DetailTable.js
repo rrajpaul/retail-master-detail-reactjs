@@ -24,8 +24,7 @@ class DetailTable extends Component {
       let response = await axios.get(url);
       let data = response.data;
       this.setState({ data: data });
-      let headerNames = Object.keys(data[0]);
-     
+      let headerNames = Object.keys(data[0]);     
       this.setState({ headerNames:  headerNames.slice(1) });
     } catch (err) {
       console.log(err);
@@ -33,10 +32,10 @@ class DetailTable extends Component {
   }
 
   render(){
-    const { masterKey } = this.props;
-    const localAdd = false;
-    const localEdit = false;
-    const localDelete = false;
+    const masterKey = this.props.masterKey;
+    const localAdd = true;
+    const localEdit = true;
+    const localDelete = true;
     return(
       <DataTable key={"style_detail_" + this.state.masterKey}
         collapsedIcon={''}
@@ -47,6 +46,10 @@ class DetailTable extends Component {
         allowEdit={localEdit}
         allowDelete={localDelete}
         headerNames={this.state.headerNames}
+        handleExpand={this.handleExpand}
+        handleAdd={this.handleAdd}
+        handleEdit={this.handleEdit}
+        handleDelete={this.handleDelete}
         data={this.state.data}
         masterKey={masterKey}
       />
