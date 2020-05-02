@@ -4,12 +4,16 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.2",
+    "node-sass": "^4.14.0",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dev-utils": "^10.0.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "^3.3.0",
+    "react-dom": "^16.13.1",
+    "react-paginate": "^6.3.2",
+    "react-scripts": "^3.4.1",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.1"
+    "semantic-ui-react": "^0.88.2",
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,87 +37,6 @@
     ]
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.11.2"
-  },
-  "masterConfig": {
-    "collapsedIcon": "large caret right",
-    "expandedIcon": "large caret down",
-    "showDetails": true,
-    "allowAdd": true,
-    "allowEdit": true,
-    "allowDelete": true
-  },
-  "detailConfig": {
-    "showDetails": true,
-    "allowAdd": true,
-    "allowEdit": true,
-    "allowDelete": true
-  },
-  "themes": {
-    "themeGreenPurple": {
-      "masterColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:hover_background-color": "#C9E7CA"},
-        {"th_background-color": "#4CAF50"}
-      ], 
-      "detailColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:nth-child(odd)_background-color": "#DDDDDD"},
-        {"tr:hover_background-color": "#EFDBEE"},
-        {"th_background-color": "#AF4CAB"}
-      ]
-    },
-    "themeBlueBlue": {
-      "masterColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:hover_background-color": "#CCD7FF"},
-        {"th_background-color": "#5C80FF"}
-      ], 
-      "detailColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:nth-child(odd)_background-color": "#DDDDDD"},
-        {"tr:hover_background-color": "#BCD8F6"},
-        {"th_background-color": "#549CE8"}
-      ]
-    },
-    "themeRedRedAna": {
-      "masterColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:hover_background-color": "#FFCCD7"},
-        {"th_background-color": "#4CAF50"}
-      ], 
-      "detailColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:nth-child(odd)_background-color": "#DDDDDD"},
-        {"tr:hover_background-color": "#F6BCE5"},
-        {"th_background-color": "#E858BF"}
-      ]
-    },
-    "themeRedRedMon": {
-      "masterColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:hover_background-color": "#E4C9E8"},
-        {"th_background-color": "#773780"}
-      ], 
-      "detailColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:nth-child(odd)_background-color": "#DDDDDD"},
-        {"tr:hover_background-color": "#FCE6FF"},
-        {"th_background-color": "#F7BAFF"}
-      ]
-    },
-    "themeRedRedTri": {
-      "masterColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:hover_background-color": "#E7C6EC"},
-        {"th_background-color": "#A53BB3"}
-      ], 
-      "detailColor": [
-        {"tr:nth-child(even)_background-color": "#F2F2F2"},
-        {"tr:nth-child(odd)_background-color": "#DDDDDD"},
-        {"tr:hover_background-color": "#FFF8E6"},
-        {"th_background-color": "#FFE087"}
-      ]
-    }    
+    "@fortawesome/fontawesome-free": "^5.13.0"
   }
 }

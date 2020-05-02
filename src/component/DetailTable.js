@@ -1,50 +1,56 @@
-import React, {Component} from 'react';
-import DataTable from './DataTable';
-import axios from 'axios'
+import React from "react";
+import DataTable from "./DataTable";
+import axios from "axios";
+import configInfo from "../config.json"; 
 
-class DetailTable extends Component {
+const config = configInfo.detailConfig;
+
+class DetailTable extends React.Component {
   constructor(props) {
-      super(props)
-      this.state = {
-        showDetails: true,
-        data: [],
-        headerNames: [],
-        masterKey: this.props.masterKey
-      }
+    super(props);
+    this.state = {
+      data: [],
+      headerNames: [],
+      masterKey: this.props.masterKey,
+    };
   }
 
   componentDidMount() {
     this.getDetailData();
   }
-  
-  getDetailData = async() => {
+
+  getDetailData = async () => {
     try {
-      const encodedValue = encodeURIComponent(this.state.masterKey);
-      const url = `http://localhost:9000/demo/api/styles/${encodedValue}/sku`;
+      const encodedId = encodeURIComponent(this.state.masterKey);
+      const url = config.dataUrl.replace('{StyleId}', encodedId);
       let response = await axios.get(url);
       let data = response.data;
       this.setState({ data: data });
-      let headerNames = Object.keys(data[0]);     
-      this.setState({ headerNames:  headerNames.slice(1) });
+      let headerNames = Object.keys(data[0]);
+      this.setState({ headerNames: headerNames.slice(1) });
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-  render(){
+  detailDataCallback = (modifiedData) => {
+    this.setState({ data: modifiedData });
+  };
+
+  render() {
     const masterKey = this.props.masterKey;
-    const localAdd = true;
-    const localEdit = true;
-    const localDelete = true;
-    return(
-      <DataTable key={"style_detail_" + this.state.masterKey}
-        collapsedIcon={''}
-        expandedIcon={''}
-        showDetails={false}
+    let dataValues = Object.values(this.state.data);
+    let detail_id = dataValues[1];
+    return (
+      <DataTable
+        key={"_detail_dt-" + masterKey}
+        collapsedIcon={""}
+        expandedIcon={""}
+        showDetails={config.showDetails}
         isChildTable={true}
-        allowAdd={localAdd}
-        allowEdit={localEdit}
-        allowDelete={localDelete}
+        allowAdd={config.allowAdd}
+        allowEdit={config.allowEdit}
+        allowDelete={config.allowDelete}
         headerNames={this.state.headerNames}
         handleExpand={this.handleExpand}
         handleAdd={this.handleAdd}
@@ -52,8 +58,10 @@ class DetailTable extends Component {
         handleDelete={this.handleDelete}
         data={this.state.data}
         masterKey={masterKey}
+        detailKey={detail_id}
+        callbackData={this.detailDataCallback}
       />
-    )
+    );
   }
 }
 

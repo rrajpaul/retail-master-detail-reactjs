@@ -1,0 +1,39 @@
+{
+  "masterConfig": {
+    "collapsedIcon": "large caret right",
+    "expandedIcon": "large caret down",
+    "addIcon": "plus",
+    "editIcon": "edit",
+    "deleteIcon": "close",
+    "showDetails": true,
+    "allowAdd": true,
+    "allowEdit": true,
+    "allowDelete": true,
+    "keyFieldName": "StyleId",
+    "dataUrl": "http://localhost:9000/demo/api/styles",
+    "addUrl": "http://localhost:9000/demo/api/styles",
+    "updateUrl": "http://localhost:9000/demo/api/styles/updates/{StyleId}",
+    "deleteUrl": "http://localhost:9000/demo/api/styles/{StyleId}"
+  },
+  "detailConfig": {
+    "showDetails": false,
+    "addIcon": "plus",
+    "editIcon": "edit",
+    "deleteIcon": "close",
+    "allowAdd": true,
+    "allowEdit": true,
+    "allowDelete": true,
+    "keyFieldName": "SkuNumber",
+    "dataUrl": "http://localhost:9000/demo/api/styles/{StyleId}/skus",
+    "addUrl": "http://localhost:9000/demo/api/skus", 
+    "updateUrl": "http://localhost:9000/demo/api/skus/{SkuNumber}",
+    "deleteUrl": "http://localhost:9000/demo/api/styles/{StyleId}/skus"
+  },
+  "pager": {
+    "pageLimit": 10,
+    "pagerButtonType": "circle",
+    "pagerPosition": "bottom",
+    "pagerIconPrevious": "angle left",
+    "pagerIconNext": "angle right"
+  }
+}
