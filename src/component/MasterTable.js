@@ -14,25 +14,28 @@ class MasterTable extends React.Component {
       data: [],
       headerNames: [],
       pageCount: 0,
-      offset: 0
+      currentPage: 1
     };
   }
 
   componentDidMount() {
-    this.getMasterData();     
+    this.getMasterData(1);     
   }
 
-  getMasterData = async () => {
+  getMasterData = async (page) => {
     try {
-      const url = config.dataUrl;
+      const encodedPageNumber = encodeURIComponent(page);
+      const encodedPerPage = encodeURIComponent(pager.pageLimit);
+      const url = config.dataUrl.replace('{PageNumber}', encodedPageNumber).replace('{PerPage}', encodedPerPage);
       let response = await axios.get(url);
+;
+      let resCount = await axios.get(config.countUrl);
 
-      const count = response.data.length;
-      const slice = response.data.slice(this.state.offset, this.state.offset + pager.pageLimit);
-      let headerNames = Object.keys(slice[0]);
+      const count = resCount.data;
+      let headerNames = Object.keys(response.data[0]);
       this.setState({
         pageCount: Math.ceil(count / pager.pageLimit), 
-        data: slice,
+        data: response.data,
         headerNames
       })
     } catch (err) {
@@ -48,8 +51,7 @@ class MasterTable extends React.Component {
         pageLimit={pager.pageLimit}   
         pageCount={this.state.pageCount}
         pagerButtonType={pager.pagerButtonType}    
-        offset={this.state.offset}
-        callbackData={this.pagerDataCallback}
+        pageCallBack={this.pagerDataCallback}
       />)
     )
   }
@@ -58,9 +60,8 @@ class MasterTable extends React.Component {
     this.setState({ data });
   };
 
-  pagerDataCallback = (offset) => {
-    this.setState({ offset });
-    this.getMasterData();
+  pagerDataCallback = (currentPage) => {
+    this.getMasterData(currentPage);
   };
 
   render() {

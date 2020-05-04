@@ -10,7 +10,8 @@
     "allowEdit": true,
     "allowDelete": true,
     "keyFieldName": "StyleId",
-    "dataUrl": "http://localhost:9000/demo/api/styles",
+    "dataUrl": "http://localhost:9000/demo/api/styles/{PageNumber}/{PerPage}",
+    "countUrl": "http://localhost:9000/demo/api/styles_count",
     "addUrl": "http://localhost:9000/demo/api/styles",
     "updateUrl": "http://localhost:9000/demo/api/styles/updates/{StyleId}",
     "deleteUrl": "http://localhost:9000/demo/api/styles/{StyleId}"

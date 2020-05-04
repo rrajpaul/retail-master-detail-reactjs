@@ -7,36 +7,26 @@ class Pagination extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageCount: 0,
-      offset: 0,
       currentPage: 1
     };
   };
-
+  
   onPageChanged = e => {
-    let selected = parseInt(e.target.innerText, 10);
-    let offset = 0;
-    if(selected > 1) {
-      offset = Math.ceil((selected - 1) * this.props.pageLimit);
-    }
+    let page = parseInt(e.target.innerText, 10);
 
-    this.setState({ offset, currentPage: selected }, () => {
-      this.props.callbackData(offset);
+    this.setState({ currentPage: page }, () => {
+      this.props.pageCallBack(page);
     });
   }
 
   onPageMoveLeft = e => {
     e.preventDefault();
-    let offset = 0;
 
     if(this.state.currentPage > 1) {
-      let page = this.state.currentPage - 1;
+      let page = this.state.currentPage - 1; 
+      this.setState({ currentPage: page });     
+      this.props.pageCallBack(page);
       
-      offset = Math.ceil((page - 1) * this.props.pageLimit);
-
-      this.setState({ offset, currentPage: page}, () => {
-        this.props.callbackData(offset);
-      });
       let el = document.getElementById("btn_"+ page);
       el.focus();
     }
@@ -48,15 +38,12 @@ class Pagination extends Component {
 
   onPageMoveRight = e => {
     e.preventDefault();
-    let offset = 0;
 
     if(this.state.currentPage < (this.props.pageCount)) {
       let page = this.state.currentPage + 1;
-      offset = Math.ceil((page - 1) * this.props.pageLimit);
-  
-      this.setState({ offset, currentPage: page}, () => {
-        this.props.callbackData(offset);
-      });
+      this.setState({currentPage: page});
+      this.props.pageCallBack(page);
+
       let el = document.getElementById("btn_"+ page);
       el.focus();
     }
@@ -135,8 +122,7 @@ Pagination.propTypes = {
   pageLimit: PropTypes.number.isRequired,
   pageCount: PropTypes.number.isRequired,
   pagerButtonType: PropTypes.string.isRequired,
-  offset: PropTypes.number.isRequired,
-  callbackData: PropTypes.func.isRequired
+  pageCallBack: PropTypes.func.isRequired,
 }; 
 
 export default Pagination;
