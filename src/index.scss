@@ -168,8 +168,7 @@ body {
   outline: 0;
 }
 
-.pager-circle-select {  
-  @extend .pager-circle;
+.pager-circle-emulate-focus {
   background-color: $pagerSelectColor;
   color: $pagerSelectFontColor;
   font-weight: bold;
@@ -177,27 +176,16 @@ body {
 }
 
 .pager-circle:focus {
-  background-color: $pagerSelectColor;
-  color: $pagerSelectFontColor;
-  font-weight: bold;
-  outline: none;
+  @extend .pager-circle-emulate-focus;
+}
+
+.pager-circle-select {  
+  @extend .pager-circle;
+  @extend .pager-circle-emulate-focus;
 }
 
 .pager-circle-move {  
-  width:37px;
-  height:37px;
-  line-height:37px;
-  border: 1px solid $pagerPrimaryColor;
-  border-radius: 50%;
-  color: $pagerFontColor;
-  margin: 1px;
-  text-align:center;
-  text-decoration:none;
-  background: $pagerPrimaryColor;
-  box-shadow: 0 0 3px gray;
-  font-size: 9px;
-  font-weight:bold;
-  outline: 0;
+  @extend .pager-circle;
 }
 
 .pager-circle-move:focus {
@@ -237,6 +225,11 @@ body {
 
 .pager-square-move:focus {
   outline: none;
+}
+
+.pager-square-select {  
+  @extend .pager;
+  @extend .pager:focus;
 }
 
 code {
