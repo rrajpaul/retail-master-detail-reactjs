@@ -15,7 +15,7 @@ class Pagination extends Component {
   componentDidUpdate = () => {
     let el = document.getElementById("btn_" + this.state.currentPage);
     if( (el !== null) ) {
-     el.className="pager-circle-select";
+     el.className = this.setButtonStyle("select");
     } 
   }
 
@@ -32,7 +32,7 @@ class Pagination extends Component {
 
     let el = document.getElementById("btn_"+ this.state.previousPage);
     if(el !== null) {
-      el.className="pager-circle";
+      el.className = this.setButtonStyle(option);
     }
 
     this.setState({ previousPage: page } )
@@ -42,7 +42,7 @@ class Pagination extends Component {
     });
   }
 
-  onPageMoveLeft = e => {
+  onPageMoveLeft = option => e =>{
     e.preventDefault();
 
     if(this.state.currentPage > 1) {
@@ -53,7 +53,7 @@ class Pagination extends Component {
 
       let elprev = document.getElementById("btn_"+ this.state.previousPage);
       if(elprev !== null) {
-        elprev.className="pager-circle";
+        elprev.className = this.setButtonStyle(option);
       }
       this.setState({previousPage: page});
     }
@@ -63,7 +63,7 @@ class Pagination extends Component {
     }
   };
 
-  onPageMoveRight = e => {
+  onPageMoveRight = option => e => {
     e.preventDefault();
 
     if(this.state.currentPage < (this.props.pageCount)) {
@@ -74,7 +74,7 @@ class Pagination extends Component {
 
       let elprev = document.getElementById("btn_"+ this.state.previousPage);
       if(elprev !== null) {
-        elprev.className="pager-circle";
+        elprev.className = this.setButtonStyle(option);
       }
       this.setState({previousPage: page});
     }
@@ -85,7 +85,7 @@ class Pagination extends Component {
   };
 
   setButtonStyle = (option) => {
-    let styleClass = "pager pager-" + option;
+    let styleClass = "";
     if(this.props.pagerButtonType === "circle") {
       styleClass = "pager-circle";
       if( (option === "move") || (option === "select") ) {
@@ -129,7 +129,7 @@ class Pagination extends Component {
         <button 
             id={"btn_left"}
             className={this.setButtonStyle(option)} 
-            onClick={this.onPageMoveLeft}>          
+            onClick={this.onPageMoveLeft("button")}>          
             {
               this.props.pagerButtonType === "circle"
               ?<Icon size="large" className="angle left" fitted={true}></Icon>
@@ -140,7 +140,7 @@ class Pagination extends Component {
         <button 
             id={"btn_right"}
             className={this.setButtonStyle(option)} 
-            onClick={this.onPageMoveRight}>        
+            onClick={this.onPageMoveRight("button")}>        
             {
               this.props.pagerButtonType === "circle"
               ?<Icon size="large" className="angle right" fitted={true}></Icon>

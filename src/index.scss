@@ -19,6 +19,7 @@ $detailZebraColor: #e6e6e6;
 
 $pagerPrimaryColor: #a53bb3;
 $pagerFontColor : white;
+$pageFonSize: 10px;
 $pagerSelectColor: #7b2d86;
 $pagerSelectFontColor : white;
 
@@ -163,12 +164,12 @@ body {
   text-decoration:none;
   background: $pagerPrimaryColor;
   box-shadow: 0 0 3px gray;
-  font-size: 9px;
-  font-weight:bold;
+  font-size: $pageFonSize;
+  font-weight: normal;
   outline: 0;
 }
 
-.pager-circle-emulate-focus {
+.pager-emulate-focus {
   background-color: $pagerSelectColor;
   color: $pagerSelectFontColor;
   font-weight: bold;
@@ -176,12 +177,12 @@ body {
 }
 
 .pager-circle:focus {
-  @extend .pager-circle-emulate-focus;
+  @extend .pager-emulate-focus;
 }
 
 .pager-circle-select {  
   @extend .pager-circle;
-  @extend .pager-circle-emulate-focus;
+  @extend .pager-emulate-focus;
 }
 
 .pager-circle-move {  
@@ -192,44 +193,39 @@ body {
   outline: none;
 }
 
-.pager {
+.pager-square {  
   height: 35px;
-  background-color: $pagerPrimaryColor;
-  color:$pagerFontColor;
-  font-size: 12px;
-  border-radius: 5px;  
-}
-
-.pager:focus {     
-  background-color: $pagerSelectColor;
-  color: $pagerSelectFontColor;
-  font-weight: bold;
-  outline: none;
-}
-
-.pager-button {
   width: 50px;
-}
-
-.pager-move {
-  width: 80px;
-}
-
-.pager-square-move {
-  height: 35px;
+  line-height:37px;
+  border: 1px solid $pagerPrimaryColor;
   background-color: $pagerPrimaryColor;
+  box-shadow: 0 0 3px gray;
   color:$pagerFontColor;
-  font-size: 12px;
+  margin: 1px;
+  text-align:center;
+  text-decoration:none;
+  font-size: $pageFonSize;
+  font-weight: normal;
   border-radius: 5px;  
+  outline: 0;
+}
+
+.pager-square:focus {
+  @extend .pager-emulate-focus;
+}
+
+.pager-square-select {  
+  @extend .pager-square;
+  @extend .pager-emulate-focus;
+}
+
+.pager-square-move {  
+  @extend .pager-square;
+  width: 80px;
 }
 
 .pager-square-move:focus {
   outline: none;
-}
-
-.pager-square-select {  
-  @extend .pager;
-  @extend .pager:focus;
 }
 
 code {
