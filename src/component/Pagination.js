@@ -7,12 +7,45 @@ class Pagination extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 1
-    };
+      currentPage: 1,
+      previousPage: 1
+    };    
   };
+
+  componentDidUpdate = () => {
+    let el = document.getElementById("btn_"+ 1);
+    if( (el !== null) && (this.state.currentPage === 1 ) ) {
+     el.className="pager-circle-select";
+    } 
+  }
+
+  getButtonFocus = (page) => {
+    let el = document.getElementById("btn_"+ page);
+    if(el !== null) {
+      el.focus();    
+    }    
+  }
+
+  getButtonBlur = () =>{
+    let el = document.getElementById("btn_"+ this.state.currentPage);
+    if(el !== null) {
+      el.className="pager-circle-select";
+      this.setState({ previousPage: this.state.currentPage }); 
+      let elprev = document.getElementById("btn_"+ this.state.previousPage);
+      if(elprev !== null) {
+        elprev.className="pager-circle";
+      }
+    } 
+  }
   
+
   onPageChanged = e => {
     let page = parseInt(e.target.innerText, 10);
+
+    let el = document.getElementById("btn_"+ this.state.previousPage);
+    if(el !== null) {
+      el.className="pager-circle";
+    } 
 
     this.setState({ currentPage: page }, () => {
       this.props.pageCallBack(page);
@@ -27,12 +60,11 @@ class Pagination extends Component {
       this.setState({ currentPage: page });     
       this.props.pageCallBack(page);
       
-      let el = document.getElementById("btn_"+ page);
-      el.focus();
+      this.getButtonFocus(page);
     }
+
     if(this.state.currentPage === 1) {
-      let el = document.getElementById("btn_"+ 1);
-      el.focus();
+      this.getButtonFocus(1);
     }
   };
 
@@ -44,12 +76,11 @@ class Pagination extends Component {
       this.setState({currentPage: page});
       this.props.pageCallBack(page);
 
-      let el = document.getElementById("btn_"+ page);
-      el.focus();
+      this.getButtonFocus(page);
     }
+
     if(this.state.currentPage === (this.props.pageCount)) {
-      let el = document.getElementById("btn_" + (this.props.pageCount));
-      el.focus();
+      this.getButtonFocus(this.props.pageCount);
     }
   };
 
@@ -81,7 +112,8 @@ class Pagination extends Component {
           id={"btn_" + item}
           key={item} 
           className={this.setButtonType("button")} 
-          onClick={this.onPageChanged}          
+          onClick={this.onPageChanged}  
+          onBlur={this.getButtonBlur}        
         >
           {item}
         </button>         
@@ -95,7 +127,8 @@ class Pagination extends Component {
         <button 
             id={"btn_left"}
             className={this.setButtonType("move")} 
-            onClick={this.onPageMoveLeft}>          
+            onClick={this.onPageMoveLeft}
+            onBlur={this.getButtonBlur}>          
             {
               this.props.pagerButtonType === "circle"
               ?<Icon size="large" className="angle left" fitted={true}></Icon>
@@ -106,7 +139,8 @@ class Pagination extends Component {
         <button 
             id={"btn_right"}
             className={this.setButtonType("move")} 
-            onClick={this.onPageMoveRight}>          
+            onClick={this.onPageMoveRight}
+            onBlur={this.getButtonBlur}>          
             {
               this.props.pagerButtonType === "circle"
               ?<Icon size="large" className="angle right" fitted={true}></Icon>

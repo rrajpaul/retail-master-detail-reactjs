@@ -168,6 +168,14 @@ body {
   outline: 0;
 }
 
+.pager-circle-select {  
+  @extend .pager-circle;
+  background-color: $pagerSelectColor;
+  color: $pagerSelectFontColor;
+  font-weight: bold;
+  outline: none;
+}
+
 .pager-circle:focus {
   background-color: $pagerSelectColor;
   color: $pagerSelectFontColor;

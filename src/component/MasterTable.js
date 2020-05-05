@@ -13,13 +13,12 @@ class MasterTable extends React.Component {
     this.state = {
       data: [],
       headerNames: [],
-      pageCount: 0,
-      currentPage: 1
+      pageCount: 0
     };
   }
 
-  componentDidMount() {
-    this.getMasterData(1);     
+  componentDidMount = () => {
+    this.getMasterData(1);    
   }
 
   getMasterData = async (page) => {
@@ -28,7 +27,6 @@ class MasterTable extends React.Component {
       const encodedPerPage = encodeURIComponent(pager.pageLimit);
       const url = config.dataUrl.replace('{PageNumber}', encodedPageNumber).replace('{PerPage}', encodedPerPage);
       let response = await axios.get(url);
-;
       let resCount = await axios.get(config.countUrl);
 
       const count = resCount.data;
@@ -60,8 +58,8 @@ class MasterTable extends React.Component {
     this.setState({ data });
   };
 
-  pagerDataCallback = (currentPage) => {
-    this.getMasterData(currentPage);
+  pagerDataCallback = (page) => {
+    this.getMasterData(page); 
   };
 
   render() {
